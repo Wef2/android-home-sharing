@@ -1,9 +1,11 @@
-package mcl.jejunu.ac.homesharing;
+package mcl.jejunu.ac.homesharing.activity;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import mcl.jejunu.ac.homesharing.R;
 
 public class SplashActivity extends AppCompatActivity {
 

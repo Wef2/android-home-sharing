@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="mcl.jejunu.ac.homesharing.SplashActivity">
+    tools:context=".activity.SplashActivity">
 
     <ImageView
         android:src="@drawable/home_512"

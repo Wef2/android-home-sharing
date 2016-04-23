@@ -3,13 +3,13 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="숙소" />
+            android:id="@+id/nav_home_registry"
+            android:icon="@drawable/ic_place_black_24dp"
+            android:title="숙소 등록" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="관광지" />
+            android:id="@+id/nav_home_find"
+            android:icon="@drawable/ic_done_black_24dp"
+            android:title="숙소 찾기" />
     </group>
 
 </menu>
