@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import mcl.jejunu.ac.homesharing.R;
 import mcl.jejunu.ac.homesharing.fragment.FindFragment;
+import mcl.jejunu.ac.homesharing.fragment.RegistryFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        getFragmentManager().beginTransaction().replace(R.id.fragment_layout, FindFragment.getInstance()).commit();
     }
 
     @Override
@@ -48,11 +51,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home_registry) {
-            getFragmentManager().beginTransaction().replace(R.id.fragment_layout, FindFragment.getInstance())
-                    .commit();
+            getFragmentManager().beginTransaction().replace(R.id.fragment_layout, RegistryFragment.getInstance()).commit();
         } else if (id == R.id.nav_home_find) {
-            getFragmentManager().beginTransaction().replace(R.id.fragment_layout, FindFragment.getInstance())
-                    .commit();
+            getFragmentManager().beginTransaction().replace(R.id.fragment_layout, FindFragment.getInstance()).commit();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
