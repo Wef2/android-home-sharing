@@ -14,16 +14,7 @@ import mcl.jejunu.ac.homesharing.R;
  */
 public class RegistryFragment extends Fragment {
 
-    private static RegistryFragment newInstance = null;
-
     private Button registrationButton;
-
-    public static RegistryFragment getInstance(){
-        if(newInstance == null){
-            newInstance = new RegistryFragment();
-        }
-        return newInstance;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -1,6 +1,7 @@
 package mcl.jejunu.ac.homesharing.fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import mcl.jejunu.ac.homesharing.R;
+import mcl.jejunu.ac.homesharing.activity.HomeInformationActivity;
 import mcl.jejunu.ac.homesharing.adapter.HomeListAdapter;
 import mcl.jejunu.ac.homesharing.model.HomeModel;
 
@@ -20,19 +22,10 @@ import mcl.jejunu.ac.homesharing.model.HomeModel;
  */
 public class FindFragment extends Fragment {
 
-    private static FindFragment newInstance = null;
-
     private ArrayList<HomeModel> homeList;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-
-    public static FindFragment getInstance(){
-        if(newInstance == null){
-            newInstance = new FindFragment();
-        }
-        return newInstance;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +39,13 @@ public class FindFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+        recyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), HomeInformationActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

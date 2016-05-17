@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        getFragmentManager().beginTransaction().replace(R.id.fragment_layout, FindFragment.getInstance()).commit();
+        getFragmentManager().beginTransaction().replace(R.id.fragment_layout, new FindFragment()).commit();
     }
 
     @Override
@@ -51,9 +51,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home_registry) {
-            getFragmentManager().beginTransaction().replace(R.id.fragment_layout, RegistryFragment.getInstance()).commit();
+            getFragmentManager().beginTransaction().replace(R.id.fragment_layout, new RegistryFragment()).commit();
         } else if (id == R.id.nav_home_find) {
-            getFragmentManager().beginTransaction().replace(R.id.fragment_layout, FindFragment.getInstance()).commit();
+            getFragmentManager().beginTransaction().replace(R.id.fragment_layout, new FindFragment()).commit();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
