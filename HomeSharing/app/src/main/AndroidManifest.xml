@@ -22,7 +22,9 @@
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.HomeInformationActivity"></activity>
+        <activity android:name=".activity.HomeInformationActivity"
+            android:label="@string/title_activity_home_information"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

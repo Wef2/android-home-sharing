@@ -20,7 +20,7 @@ import mcl.jejunu.ac.homesharing.model.HomeModel;
 /**
  * Created by Kim on 2016-04-23.
  */
-public class FindFragment extends Fragment {
+public class FindFragment extends Fragment implements View.OnClickListener {
 
     private ArrayList<HomeModel> homeList;
     private RecyclerView recyclerView;
@@ -33,20 +33,20 @@ public class FindFragment extends Fragment {
         homeList = new ArrayList<>();
         homeList.add(new HomeModel());
 
-        adapter = new HomeListAdapter(homeList);
+        adapter = new HomeListAdapter(homeList, this);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        recyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), HomeInformationActivity.class);
-                startActivity(intent);
-            }
-        });
         return view;
     }
 
+    @Override
+    public void onClick(View v) {
+        HomeModel homeModel = (HomeModel)v.getTag();
+        Intent intent = new Intent(getActivity(), HomeInformationActivity.class);
+        intent.putExtra("id", homeModel.getId());
+        startActivity(intent);
+    }
 }

@@ -2,6 +2,7 @@
     <string name="app_name">HomeSharing</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">제주 홈쉐어링</string>
+    <string name="title_activity_home_information">숙소 정보</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

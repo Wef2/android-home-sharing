@@ -20,10 +20,12 @@ import mcl.jejunu.ac.homesharing.model.HomeModel;
  */
 public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
     private ArrayList<HomeModel> homes;
+    private View.OnClickListener listener;
 
-    public HomeListAdapter(Collection<HomeModel> homeModels) {
+    public HomeListAdapter(Collection<HomeModel> homeModels, View.OnClickListener listener) {
         homes = new ArrayList<>();
         homes.addAll(homeModels);
+        this.listener = listener;
     }
 
     @Override
@@ -36,6 +38,12 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.cardView.setTag(getHome(position));
+        holder.cardView.setOnClickListener(listener);
+    }
+
+    public HomeModel getHome(int position){
+        return homes.get(position);
     }
 
     @Override
