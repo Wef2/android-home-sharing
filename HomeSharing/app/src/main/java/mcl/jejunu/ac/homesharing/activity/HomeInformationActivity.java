@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -23,19 +26,19 @@ public class HomeInformationActivity extends AppCompatActivity implements OnMapR
 
     private int homeId;
     private GoogleMap mGoogleMap;
+    private Button commentButton, ratingButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_information);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_white_24dp);
-        setSupportActionBar(toolbar);
-
         Intent intent = getIntent();
         homeId = intent.getIntExtra("id", 0);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_white_24dp);
+        setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +56,22 @@ public class HomeInformationActivity extends AppCompatActivity implements OnMapR
             public void onClick(View v) {
                 Intent intent = new Intent(HomeInformationActivity.this, ReservationActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        commentButton = (Button) findViewById(R.id.comment_button);
+        commentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeInformationActivity.this, CommentActivity.class);
+                startActivity(intent);
+            }
+        });
+        ratingButton = (Button) findViewById(R.id.rating_button);
+        ratingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "Rating", Snackbar.LENGTH_SHORT).show();
             }
         });
     }

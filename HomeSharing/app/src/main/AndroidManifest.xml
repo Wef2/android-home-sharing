@@ -33,6 +33,14 @@
             android:name=".activity.HomeInformationActivity"
             android:label="@string/title_activity_home_information"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ReservationActivity"
+            android:label="@string/title_activity_reservation"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".activity.CommentActivity"
+            android:label="@string/title_activity_comment"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -45,7 +53,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".activity.ReservationActivity"></activity>
     </application>
 
 </manifest>
