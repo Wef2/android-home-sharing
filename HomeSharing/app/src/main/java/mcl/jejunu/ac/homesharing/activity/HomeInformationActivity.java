@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -21,10 +22,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import mcl.jejunu.ac.homesharing.R;
+import mcl.jejunu.ac.homesharing.adapter.ImageSliderAdapter;
 
 public class HomeInformationActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private int homeId;
+    private ViewPager viewPager;
+    private ImageSliderAdapter imageSliderAdapter;
     private GoogleMap mGoogleMap;
     private Button commentButton, ratingButton;
 
@@ -45,6 +49,10 @@ public class HomeInformationActivity extends AppCompatActivity implements OnMapR
                 finish();
             }
         });
+
+        imageSliderAdapter = new ImageSliderAdapter(this);
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        viewPager.setAdapter(imageSliderAdapter);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -85,11 +93,9 @@ public class HomeInformationActivity extends AppCompatActivity implements OnMapR
         } else {
 
         }
-        mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(50));
         LatLng jeju = new LatLng(33.499234, 126.530714);
         mGoogleMap.addMarker(new MarkerOptions().position(jeju).title("제주시"));
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jeju, 10));
-
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jeju, 12));
     }
 
 }

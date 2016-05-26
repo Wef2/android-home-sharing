@@ -3,9 +3,9 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home_registry"
+            android:id="@+id/nav_my_home"
             android:icon="@drawable/ic_place_black_24dp"
-            android:title="숙소 등록" />
+            android:title="내 숙소" />
         <item
             android:id="@+id/nav_home_find"
             android:icon="@drawable/ic_done_black_24dp"

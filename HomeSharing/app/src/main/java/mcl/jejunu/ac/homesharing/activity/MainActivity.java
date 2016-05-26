@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import mcl.jejunu.ac.homesharing.R;
 import mcl.jejunu.ac.homesharing.fragment.FindFragment;
-import mcl.jejunu.ac.homesharing.fragment.RegistryFragment;
+import mcl.jejunu.ac.homesharing.fragment.MyHomeFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_home_registry) {
-            getFragmentManager().beginTransaction().replace(R.id.fragment_layout, new RegistryFragment()).commit();
+        if (id == R.id.nav_my_home) {
+            getFragmentManager().beginTransaction().replace(R.id.fragment_layout, new MyHomeFragment()).commit();
         } else if (id == R.id.nav_home_find) {
             getFragmentManager().beginTransaction().replace(R.id.fragment_layout, new FindFragment()).commit();
         }
