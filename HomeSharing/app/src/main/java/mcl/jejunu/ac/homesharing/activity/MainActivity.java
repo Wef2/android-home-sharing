@@ -12,15 +12,18 @@ import android.view.MenuItem;
 import mcl.jejunu.ac.homesharing.R;
 import mcl.jejunu.ac.homesharing.fragment.FindFragment;
 import mcl.jejunu.ac.homesharing.fragment.MyHomeFragment;
+import mcl.jejunu.ac.homesharing.fragment.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -52,8 +55,13 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_my_home) {
             getFragmentManager().beginTransaction().replace(R.id.fragment_layout, new MyHomeFragment()).commit();
+            toolbar.setTitle("내 방 관리");
         } else if (id == R.id.nav_home_find) {
             getFragmentManager().beginTransaction().replace(R.id.fragment_layout, new FindFragment()).commit();
+            toolbar.setTitle("숙소 찾기");
+        } else if (id == R.id.nav_profile) {
+            getFragmentManager().beginTransaction().replace(R.id.fragment_layout, new ProfileFragment()).commit();
+            toolbar.setTitle("내 프로필");
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
