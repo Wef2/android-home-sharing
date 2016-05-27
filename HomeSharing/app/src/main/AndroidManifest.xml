@@ -42,8 +42,12 @@
             android:label="@string/title_activity_registration"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".activity.CommentActivity"
-            android:label="@string/title_activity_comment"
+        <activity android:name=".activity.WriteCommentActivity"
+            android:label="@string/title_activity_write_comment"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity android:name=".activity.CommentListActivity"
+            android:label="@string/title_activity_comment_list"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

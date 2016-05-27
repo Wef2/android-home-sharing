@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import mcl.jejunu.ac.homesharing.R;
 import mcl.jejunu.ac.homesharing.fragment.FindFragment;
-import mcl.jejunu.ac.homesharing.fragment.MyHomeFragment;
+import mcl.jejunu.ac.homesharing.fragment.MyRoomFragment;
 import mcl.jejunu.ac.homesharing.fragment.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_my_home) {
-            getFragmentManager().beginTransaction().replace(R.id.fragment_layout, new MyHomeFragment()).commit();
+            getFragmentManager().beginTransaction().replace(R.id.fragment_layout, new MyRoomFragment()).commit();
             toolbar.setTitle("내 방 관리");
         } else if (id == R.id.nav_home_find) {
             getFragmentManager().beginTransaction().replace(R.id.fragment_layout, new FindFragment()).commit();

@@ -5,7 +5,8 @@
     <string name="title_activity_home_information">숙소 정보</string>
     <string name="title_activity_reservation">숙소 예약</string>
     <string name="title_activity_registration">숙소 등록</string>
-    <string name="title_activity_comment">숙소 평가</string>
+    <string name="title_activity_write_comment">평가 작성</string>
+    <string name="title_activity_comment_list">숙소 평가</string>
 
     <string name="menu_activity_reservation">숙소 예약</string>
 

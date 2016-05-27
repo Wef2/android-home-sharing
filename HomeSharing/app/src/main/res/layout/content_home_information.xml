@@ -33,6 +33,13 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp">
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="10dp"
+                    android:scaleType="fitXY"
+                    android:src ="@drawable/ic_place_black_24dp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -58,6 +65,13 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp">
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="10dp"
+                    android:scaleType="fitXY"
+                    android:src ="@drawable/ic_money_bag"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -81,6 +95,13 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="10dp"
+                    android:scaleType="fitXY"
+                    android:src ="@drawable/ic_people_black_24dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -108,6 +129,13 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp">
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="10dp"
+                    android:scaleType="fitXY"
+                    android:src ="@drawable/ic_thumb_up_black_24dp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -129,6 +157,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <Button
@@ -137,6 +166,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/ic_create_white_24dp"
                     android:text="코멘트" />
 
                 <Button
@@ -145,7 +176,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/ic_star_white"
                     android:text="평가" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
             </LinearLayout>
 

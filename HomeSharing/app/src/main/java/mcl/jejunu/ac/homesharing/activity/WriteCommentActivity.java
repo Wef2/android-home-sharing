@@ -12,14 +12,14 @@ import android.widget.EditText;
 
 import mcl.jejunu.ac.homesharing.R;
 
-public class CommentActivity extends AppCompatActivity {
+public class WriteCommentActivity extends AppCompatActivity {
 
     private EditText editText;
     private InputMethodManager inputMethodManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comment);
+        setContentView(R.layout.activity_write_comment);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_white_24dp);

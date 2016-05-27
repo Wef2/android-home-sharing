@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activity.CommentActivity"
-    tools:showIn="@layout/activity_comment">
+    tools:context=".activity.WriteCommentActivity"
+    tools:showIn="@layout/activity_write_comment">
 
     <LinearLayout
         android:layout_width="match_parent"
