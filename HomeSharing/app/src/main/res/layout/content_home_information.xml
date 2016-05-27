@@ -38,7 +38,7 @@
                     android:layout_height="20dp"
                     android:layout_marginRight="10dp"
                     android:scaleType="fitXY"
-                    android:src ="@drawable/ic_place_black_24dp"/>
+                    android:src="@drawable/ic_place_black_24dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
                     android:layout_marginRight="10dp"
                     android:text="위치"
                     android:textColor="#111111"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/location_text"
@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:text="제주시 아라동"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
 
             </LinearLayout>
 
@@ -70,7 +70,7 @@
                     android:layout_height="20dp"
                     android:layout_marginRight="10dp"
                     android:scaleType="fitXY"
-                    android:src ="@drawable/ic_money_bag"/>
+                    android:src="@drawable/ic_money_bag" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -78,14 +78,14 @@
                     android:layout_marginRight="10dp"
                     android:text="가격"
                     android:textColor="#111111"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/price_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="20000원"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
 
             </LinearLayout>
 
@@ -101,32 +101,32 @@
                     android:layout_height="20dp"
                     android:layout_marginRight="10dp"
                     android:scaleType="fitXY"
-                    android:src ="@drawable/ic_people_black_24dp"/>
+                    android:src="@drawable/ic_people_black_24dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:text="크기"
-                    android:textSize="15dp"
-                    android:textColor="#111111" />
+                    android:textColor="#111111"
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/size_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
-                    android:textSize="15dp"
-                    android:text="2인실" />
+                    android:text="2인실"
+                    android:textSize="15dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp">
 
                 <ImageView
@@ -134,23 +134,23 @@
                     android:layout_height="20dp"
                     android:layout_marginRight="10dp"
                     android:scaleType="fitXY"
-                    android:src ="@drawable/ic_thumb_up_black_24dp"/>
+                    android:src="@drawable/ic_thumb_up_black_24dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:text="평가"
-                    android:textSize="15dp"
-                    android:textColor="#111111" />
+                    android:textColor="#111111"
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/rating_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
-                    android:textSize="15dp"
-                    android:text="아직 없음" />
+                    android:text="아직 없음"
+                    android:textSize="15dp" />
 
             </LinearLayout>
 
@@ -166,8 +166,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:drawablePadding="5dp"
                     android:drawableLeft="@drawable/ic_create_white_24dp"
+                    android:drawablePadding="5dp"
                     android:text="코멘트" />
 
                 <Button
@@ -176,18 +176,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:drawablePadding="5dp"
                     android:drawableLeft="@drawable/ic_star_white"
+                    android:drawablePadding="5dp"
                     android:text="평가" />
 
             </LinearLayout>
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:text="코멘트" />
 
-            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
 
             <fragment xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
