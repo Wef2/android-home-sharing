@@ -29,7 +29,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                android:text="누구의 집"
+                android:text="제주 아라"
                 android:textColor="#111111"
                 android:textSize="25dp" />
 

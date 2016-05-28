@@ -36,7 +36,7 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
     private ImageSliderAdapter imageSliderAdapter;
 
     private FloatingActionButton floatingActionButton;
-    private Button commentButton, ratingButton;
+    private Button commentButton, ratingButton, moreButton;
 
     private ArrayList<Comment> comments;
     private RecyclerView recyclerView;
@@ -74,20 +74,26 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
         floatingActionButton = (FloatingActionButton) findViewById(R.id.reservation_button);
         commentButton = (Button) findViewById(R.id.comment_button);
         ratingButton = (Button) findViewById(R.id.rating_button);
+        moreButton = (Button) findViewById(R.id.more_button);
 
         floatingActionButton.setOnClickListener(this);
         commentButton.setOnClickListener(this);
         ratingButton.setOnClickListener(this);
+        moreButton.setOnClickListener(this);
 
         comments = new ArrayList<>();
+        comments.add(new Comment());
+        comments.add(new Comment());
         comments.add(new Comment());
 
         adapter = new CommentListAdapter(comments);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+
         recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(layoutManager);
+
     }
 
     @Override
@@ -114,6 +120,9 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
             Snackbar.make(v, "Rating", Snackbar.LENGTH_SHORT).show();
         } else if(v == floatingActionButton){
             Intent intent = new Intent(HomeInformationActivity.this, ReservationActivity.class);
+            startActivity(intent);
+        } else if(v == moreButton){
+            Intent intent = new Intent(HomeInformationActivity.this, CommentListActivity.class);
             startActivity(intent);
         }
     }
