@@ -6,15 +6,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * Created by Kim on 2016-04-23.
+ * Created by BK on 2016-05-29.
  */
 @Entity
-public class User {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long generated_id;
-    private String user_id;
-    private String password;
-    private String nickname;
+    private Long id;
+    private Long user_id;
+    private Long home_id;
+    private String content;
 }
