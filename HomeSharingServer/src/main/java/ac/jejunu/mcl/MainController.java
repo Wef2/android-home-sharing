@@ -1,7 +1,11 @@
 package ac.jejunu.mcl;
 
+import ac.jejunu.mcl.entity.Comment;
 import ac.jejunu.mcl.entity.Home;
+import ac.jejunu.mcl.entity.Rating;
+import ac.jejunu.mcl.repository.CommentRepository;
 import ac.jejunu.mcl.repository.HomeRepository;
+import ac.jejunu.mcl.repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +20,30 @@ public class MainController {
     @Autowired
     private HomeRepository homeRepository;
 
+    @Autowired
+    private CommentRepository commentRepository;
+
+    @Autowired
+    private RatingRepository ratingRepository;
+
     @RequestMapping("/home/{id}")
     public Home home(@PathVariable Long id) {
         return homeRepository.findOne(id);
+    }
+
+    @RequestMapping("/home/list")
+    public Iterable<Home> homeList(){
+        return homeRepository.findAll();
+    }
+
+    @RequestMapping("/comment/list")
+    public Iterable<Comment> commentList(){
+        return commentRepository.findAll();
+    }
+
+    @RequestMapping("/rating/list")
+    public Iterable<Rating> ratingList(){
+        return ratingRepository.findAll();
     }
 
 }
