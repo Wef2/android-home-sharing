@@ -109,7 +109,14 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
         }
         LatLng jeju = new LatLng(latitude, longitude);
         mGoogleMap.addMarker(new MarkerOptions().position(jeju).title(title));
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jeju, 12));
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jeju, 15));
+        mGoogleMap.getUiSettings().setAllGesturesEnabled(false);
+        mGoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                H
+            }
+        });
     }
 
     @Override
@@ -118,7 +125,6 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
             Intent intent = new Intent(HomeInformationActivity.this, WriteCommentActivity.class);
             startActivity(intent);
         } else if (v == ratingButton) {
-
 
         } else if (v == floatingActionButton) {
             Intent intent = new Intent(HomeInformationActivity.this, ReservationActivity.class);

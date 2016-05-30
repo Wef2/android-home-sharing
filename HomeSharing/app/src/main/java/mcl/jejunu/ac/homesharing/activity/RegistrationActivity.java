@@ -191,6 +191,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
+        this.googleMap.getUiSettings().setAllGesturesEnabled(false);
         this.googleMap.setOnMapClickListener(this);
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -198,7 +199,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
         }
         LatLng jeju = new LatLng(latitude, longitude);
-        this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jeju, 12));
+        this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jeju, 15));
+
     }
 
     @Override
