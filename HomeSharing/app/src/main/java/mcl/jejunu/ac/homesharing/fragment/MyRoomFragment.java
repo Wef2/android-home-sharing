@@ -14,6 +14,8 @@ import android.widget.Button;
 import java.util.ArrayList;
 
 import mcl.jejunu.ac.homesharing.R;
+import mcl.jejunu.ac.homesharing.activity.HomeInformationActivity;
+import mcl.jejunu.ac.homesharing.activity.ManagementActivity;
 import mcl.jejunu.ac.homesharing.activity.RegistrationActivity;
 import mcl.jejunu.ac.homesharing.adapter.HomeListAdapter;
 import mcl.jejunu.ac.homesharing.adapter.MyRoomListAdapter;
@@ -56,6 +58,10 @@ public class MyRoomFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+        HomeModel homeModel = (HomeModel)v.getTag();
+        Intent intent = new Intent(getActivity(), ManagementActivity.class);
+        intent.putExtra("id", homeModel.getId());
+        startActivity(intent);
 
     }
 }

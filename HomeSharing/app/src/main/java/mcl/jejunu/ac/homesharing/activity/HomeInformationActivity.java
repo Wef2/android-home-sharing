@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -44,6 +43,9 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
     private RecyclerView.LayoutManager layoutManager;
 
     private GoogleMap mGoogleMap;
+
+    private double latitude = 33.499234, longitude = 126.530714;
+    private String title = "제주시";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,23 +107,23 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
         } else {
 
         }
-        LatLng jeju = new LatLng(33.499234, 126.530714);
-        mGoogleMap.addMarker(new MarkerOptions().position(jeju).title("제주시"));
+        LatLng jeju = new LatLng(latitude, longitude);
+        mGoogleMap.addMarker(new MarkerOptions().position(jeju).title(title));
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jeju, 12));
     }
 
     @Override
     public void onClick(View v) {
-        if(v == commentButton){
+        if (v == commentButton) {
             Intent intent = new Intent(HomeInformationActivity.this, WriteCommentActivity.class);
             startActivity(intent);
-        }
-        else if(v == ratingButton){
-            Snackbar.make(v, "Rating", Snackbar.LENGTH_SHORT).show();
-        } else if(v == floatingActionButton){
+        } else if (v == ratingButton) {
+
+
+        } else if (v == floatingActionButton) {
             Intent intent = new Intent(HomeInformationActivity.this, ReservationActivity.class);
             startActivity(intent);
-        } else if(v == moreButton){
+        } else if (v == moreButton) {
             Intent intent = new Intent(HomeInformationActivity.this, CommentListActivity.class);
             startActivity(intent);
         }

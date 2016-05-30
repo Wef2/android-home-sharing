@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:text="체크인"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textSize="25dp" />
 
         <TextView
             android:id="@+id/checkInText"
@@ -28,7 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="날짜 선택"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textSize="25dp"
+            android:textColor="#444444"/>
 
     </LinearLayout>
 
@@ -43,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:text="체크아웃"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textSize="25dp" />
 
         <TextView
             android:id="@+id/checkOutText"
@@ -51,7 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="날짜 선택"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textSize="25dp"
+            android:textColor="#444444"/>
 
     </LinearLayout>
 
@@ -66,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:text="인원"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textSize="25dp" />
 
         <TextView
             android:id="@+id/peopleText"
@@ -74,7 +76,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="1명"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textSize="25dp"
+            android:textColor="#444444"/>
 
     </LinearLayout>
 
@@ -89,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:text="금액"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textSize="25dp" />
 
         <TextView
             android:id="@+id/moneyText"
@@ -97,7 +100,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="0원"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textSize="25dp"
+            android:textColor="#444444"/>
 
     </LinearLayout>
 

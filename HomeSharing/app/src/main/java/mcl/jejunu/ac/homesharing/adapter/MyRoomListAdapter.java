@@ -36,7 +36,8 @@ public class MyRoomListAdapter extends RecyclerView.Adapter<MyRoomListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        holder.cardView.setTag(getHome(position));
+        holder.cardView.setOnClickListener(listener);
     }
 
     public HomeModel getHome(int position) {
@@ -50,8 +51,11 @@ public class MyRoomListAdapter extends RecyclerView.Adapter<MyRoomListAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        public CardView cardView;
+
         public ViewHolder(View v) {
             super(v);
+            cardView = (CardView) v.findViewById(R.id.card_view);
         }
     }
 }

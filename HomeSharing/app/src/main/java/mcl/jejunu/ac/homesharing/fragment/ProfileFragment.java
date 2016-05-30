@@ -24,8 +24,7 @@ public class ProfileFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), RegistrationActivity.class);
-                startActivity(intent);
+
             }
         });
         return view;

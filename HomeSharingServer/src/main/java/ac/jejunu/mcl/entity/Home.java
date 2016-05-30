@@ -19,6 +19,8 @@ public class Home {
     private String owner_id;
     private String name;
     private String address;
+    private double latitude;
+    private double longitude;
     private String description;
     private int status;
 
