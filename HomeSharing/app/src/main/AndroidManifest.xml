@@ -39,6 +39,10 @@
             android:label="@string/title_activity_reservation"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".activity.ReservationListActivity"
+            android:label="@string/title_activity_reservation_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activity.RegistrationActivity"
             android:label="@string/title_activity_registration"
             android:theme="@style/AppTheme.NoActionBar" />

@@ -17,7 +17,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
@@ -34,7 +33,6 @@ import mcl.jejunu.ac.homesharing.R;
 import mcl.jejunu.ac.homesharing.adapter.CommentListAdapter;
 import mcl.jejunu.ac.homesharing.adapter.ImageSliderAdapter;
 import mcl.jejunu.ac.homesharing.model.Comment;
-import mcl.jejunu.ac.homesharing.model.Home;
 
 public class HomeInformationActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
 
@@ -142,7 +140,7 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
             LayoutInflater layoutInflater = LayoutInflater.from(this);
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             View view = layoutInflater.inflate(R.layout.dialog_rating, null);
-            final RatingBar ratingBar = (RatingBar)view.findViewById(R.id.rating_bar);
+            final RatingBar ratingBar = (RatingBar) view.findViewById(R.id.rating_bar);
             alert.setView(view);
             alert.setTitle("평가");
             alert.setNegativeButton("취소",
