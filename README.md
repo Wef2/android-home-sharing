@@ -2,5 +2,5 @@
 Jeju Home Sharing Android Application
 
 ## To Do List
-- Design
-- Database
+- Application <-> Server <-> Database
+- Sample Data
