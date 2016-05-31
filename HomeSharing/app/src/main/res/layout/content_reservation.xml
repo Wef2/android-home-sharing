@@ -10,10 +10,11 @@
     tools:showIn="@layout/activity_reservation">
 
     <LinearLayout
+        android:id="@+id/check_in_layout"
         android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,18 +27,18 @@
             android:id="@+id/checkInText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:text="날짜 선택"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:textColor="#444444"/>
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/check_out_layout"
         android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -50,18 +51,18 @@
             android:id="@+id/checkOutText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:text="날짜 선택"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:textColor="#444444"/>
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/people_layout"
         android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -74,18 +75,18 @@
             android:id="@+id/peopleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:text="1명"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:textColor="#444444"/>
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/money_layout"
         android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -98,9 +99,8 @@
             android:id="@+id/moneyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:text="0원"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:textColor="#444444"/>
 
     </LinearLayout>

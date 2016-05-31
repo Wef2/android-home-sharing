@@ -55,7 +55,7 @@
                     android:id="@+id/name_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="무명의 집"
+                    android:text="나의 집"
                     android:textColor="#444444"
                     android:textSize="20dp" />
 

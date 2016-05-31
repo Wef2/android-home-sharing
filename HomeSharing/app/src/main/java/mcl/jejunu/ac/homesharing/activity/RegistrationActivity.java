@@ -46,7 +46,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     private double latitude = 33.499234, longitude = 126.530714;
     private LatLng latLng = null;
 
-    private String name = "무명의 집", description = "안녕하세요";
+    private String name = "나의 집", description = "안녕하세요";
     private int people = 1, charge = 0;
 
     private ImageView imageView;
@@ -95,7 +95,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         View view = layoutInflater.inflate(R.layout.dialog_edit_text, null);
         final EditText input = (EditText) view.findViewById(R.id.edit_text);
-        input.setImeOptions(EditorInfo.IME_ACTION_DONE);
         alert.setView(view);
         alert.setNegativeButton("취소",
                 new DialogInterface.OnClickListener() {
@@ -191,7 +190,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
-        this.googleMap.getUiSettings().setAllGesturesEnabled(false);
         this.googleMap.setOnMapClickListener(this);
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
