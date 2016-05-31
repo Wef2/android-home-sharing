@@ -5,22 +5,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import mcl.jejunu.ac.homesharing.R;
-import mcl.jejunu.ac.homesharing.model.HomeModel;
+import mcl.jejunu.ac.homesharing.model.Home;
 
 /**
  * Created by Kim on 2016-05-27.
  */
 public class MyRoomListAdapter extends RecyclerView.Adapter<MyRoomListAdapter.ViewHolder> {
-    private ArrayList<HomeModel> homes;
+    private ArrayList<Home> homes;
     private View.OnClickListener listener;
 
-    public MyRoomListAdapter(Collection<HomeModel> homeModels, View.OnClickListener listener) {
+    public MyRoomListAdapter(Collection<Home> homeModels, View.OnClickListener listener) {
         homes = new ArrayList<>();
         homes.addAll(homeModels);
         this.listener = listener;
@@ -40,7 +39,7 @@ public class MyRoomListAdapter extends RecyclerView.Adapter<MyRoomListAdapter.Vi
         holder.cardView.setOnClickListener(listener);
     }
 
-    public HomeModel getHome(int position) {
+    public Home getHome(int position) {
         return homes.get(position);
     }
 

@@ -5,17 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import java.util.ArrayList;
 
 import mcl.jejunu.ac.homesharing.R;
 import mcl.jejunu.ac.homesharing.adapter.CommentListAdapter;
-import mcl.jejunu.ac.homesharing.adapter.HomeListAdapter;
 import mcl.jejunu.ac.homesharing.model.Comment;
-import mcl.jejunu.ac.homesharing.model.HomeModel;
 
 /**
  * Created by Kim on 2016-05-27.

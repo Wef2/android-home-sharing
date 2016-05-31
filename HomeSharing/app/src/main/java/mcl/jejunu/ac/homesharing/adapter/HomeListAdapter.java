@@ -11,16 +11,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import mcl.jejunu.ac.homesharing.R;
-import mcl.jejunu.ac.homesharing.model.HomeModel;
+import mcl.jejunu.ac.homesharing.model.Home;
 
 /**
  * Created by Kim on 2016-05-06.
  */
 public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
-    private ArrayList<HomeModel> homes;
+    private ArrayList<Home> homes;
     private View.OnClickListener listener;
 
-    public HomeListAdapter(Collection<HomeModel> homeModels, View.OnClickListener listener) {
+    public HomeListAdapter(Collection<Home> homeModels, View.OnClickListener listener) {
         homes = new ArrayList<>();
         homes.addAll(homeModels);
         this.listener = listener;
@@ -40,7 +40,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
         holder.cardView.setOnClickListener(listener);
     }
 
-    public HomeModel getHome(int position) {
+    public Home getHome(int position) {
         return homes.get(position);
     }
 

@@ -41,8 +41,9 @@ import mcl.jejunu.ac.homesharing.R;
 public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
     private static final int REQUEST_CODE = 1;
+    private static final int REQUEST_LOCATION = 2;
 
-    private GoogleMap googleMap;
+    private GoogleMap map;
     private double latitude = 33.499234, longitude = 126.530714;
     private LatLng latLng = null;
 
@@ -166,6 +167,12 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        else if(requestCode == REQUEST_LOCATION && resultCode == Activity.RESULT_OK){
+            latLng = data.getParcelableExtra("latlng");
+            map.clear();
+            map.addMarker(new MarkerOptions().position(latLng));
+            map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -189,24 +196,23 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        this.googleMap = googleMap;
-        this.googleMap.setOnMapClickListener(this);
+        map = googleMap;
+        map.setOnMapClickListener(this);
+        map.getUiSettings().setAllGesturesEnabled(false);
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
         } else {
 
         }
         LatLng jeju = new LatLng(latitude, longitude);
-        this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jeju, 15));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(jeju, 15));
 
     }
 
     @Override
     public void onMapClick(LatLng latLng) {
-        this.latLng = latLng;
-        MarkerOptions markerOptions = new MarkerOptions().position(latLng).draggable(true);
-        googleMap.clear();
-        googleMap.addMarker(markerOptions);
+        Intent intent = new Intent(RegistrationActivity.this, SelectLocationActivity.class);
+        startActivityForResult(intent, REQUEST_LOCATION);
     }
 
 }

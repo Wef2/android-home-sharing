@@ -8,11 +8,11 @@
     <string name="title_activity_write_comment">평가 작성</string>
     <string name="title_activity_comment_list">숙소 평가</string>
     <string name="title_activity_management">관리</string>
+    <string name="title_activity_maps">지도</string>
 
     <string name="menu_activity_reservation">숙소 예약</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_activity_maps">Map</string>
 
 </resources>

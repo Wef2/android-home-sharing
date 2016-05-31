@@ -9,24 +9,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import java.util.ArrayList;
 
 import mcl.jejunu.ac.homesharing.R;
-import mcl.jejunu.ac.homesharing.activity.HomeInformationActivity;
 import mcl.jejunu.ac.homesharing.activity.ManagementActivity;
 import mcl.jejunu.ac.homesharing.activity.RegistrationActivity;
-import mcl.jejunu.ac.homesharing.adapter.HomeListAdapter;
 import mcl.jejunu.ac.homesharing.adapter.MyRoomListAdapter;
-import mcl.jejunu.ac.homesharing.model.HomeModel;
+import mcl.jejunu.ac.homesharing.model.Home;
 
 /**
  * Created by Kim on 2016-04-23.
  */
 public class MyRoomFragment extends Fragment implements View.OnClickListener{
 
-    private ArrayList<HomeModel> myHomeList;
+    private ArrayList<Home> myHomeList;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -45,7 +42,7 @@ public class MyRoomFragment extends Fragment implements View.OnClickListener{
         });
 
         myHomeList = new ArrayList<>();
-        myHomeList.add(new HomeModel());
+        myHomeList.add(new Home());
         adapter = new MyRoomListAdapter(myHomeList, this);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -58,7 +55,7 @@ public class MyRoomFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        HomeModel homeModel = (HomeModel)v.getTag();
+        Home homeModel = (Home)v.getTag();
         Intent intent = new Intent(getActivity(), ManagementActivity.class);
         intent.putExtra("id", homeModel.getId());
         startActivity(intent);

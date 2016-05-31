@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +14,14 @@ import java.util.ArrayList;
 import mcl.jejunu.ac.homesharing.R;
 import mcl.jejunu.ac.homesharing.activity.HomeInformationActivity;
 import mcl.jejunu.ac.homesharing.adapter.HomeListAdapter;
-import mcl.jejunu.ac.homesharing.model.HomeModel;
+import mcl.jejunu.ac.homesharing.model.Home;
 
 /**
  * Created by Kim on 2016-04-23.
  */
 public class FindFragment extends Fragment implements View.OnClickListener {
 
-    private ArrayList<HomeModel> homeList;
+    private ArrayList<Home> homeList;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -31,7 +30,7 @@ public class FindFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_find, container, false);
         homeList = new ArrayList<>();
-        homeList.add(new HomeModel());
+        homeList.add(new Home());
 
         adapter = new HomeListAdapter(homeList, this);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
@@ -44,7 +43,7 @@ public class FindFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        HomeModel homeModel = (HomeModel)v.getTag();
+        Home homeModel = (Home)v.getTag();
         Intent intent = new Intent(getActivity(), HomeInformationActivity.class);
         intent.putExtra("id", homeModel.getId());
         startActivity(intent);
