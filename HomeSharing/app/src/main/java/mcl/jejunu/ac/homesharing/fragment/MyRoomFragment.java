@@ -13,15 +13,15 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import mcl.jejunu.ac.homesharing.R;
-import mcl.jejunu.ac.homesharing.activity.ManagementActivity;
 import mcl.jejunu.ac.homesharing.activity.RegistrationActivity;
+import mcl.jejunu.ac.homesharing.activity.ReservationListActivity;
 import mcl.jejunu.ac.homesharing.adapter.MyRoomListAdapter;
 import mcl.jejunu.ac.homesharing.model.Home;
 
 /**
  * Created by Kim on 2016-04-23.
  */
-public class MyRoomFragment extends Fragment implements View.OnClickListener{
+public class MyRoomFragment extends Fragment implements View.OnClickListener {
 
     private ArrayList<Home> myHomeList;
     private RecyclerView recyclerView;
@@ -55,8 +55,8 @@ public class MyRoomFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        Home homeModel = (Home)v.getTag();
-        Intent intent = new Intent(getActivity(), ManagementActivity.class);
+        Home homeModel = (Home) v.getTag();
+        Intent intent = new Intent(getActivity(), ReservationListActivity.class);
         intent.putExtra("id", homeModel.getId());
         startActivity(intent);
 

@@ -1,5 +1,6 @@
 package mcl.jejunu.ac.homesharing.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,7 +27,7 @@ public class ReservationListActivity extends AppCompatActivity implements View.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_comment);
+        setContentView(R.layout.activity_reservation_list);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_white_24dp);
@@ -51,6 +52,10 @@ public class ReservationListActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onClick(View v) {
-
+        Reservation reservation = (Reservation)v.getTag();
+        Intent intent = new Intent(ReservationListActivity.this, ReservationInfoActivity.class);
+        intent.putExtra("id", reservation.getId());
+        startActivity(intent);
     }
+
 }

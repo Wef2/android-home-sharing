@@ -25,9 +25,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="15dp"
+                android:text="사진"
+                android:textColor="#111111"
+                android:textSize="25dp" />
+
             <ImageView
                 android:id="@+id/home_image"
-                android:layout_marginTop="20dp"
+                android:layout_margin="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="fitCenter"

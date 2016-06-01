@@ -1,5 +1,6 @@
 package mcl.jejunu.ac.homesharing.adapter;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,15 +28,20 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
     @Override
     public ReservationListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                                 int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_row, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.reservation_row, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.cardView.setTag(getReservation(position));
+        holder.cardView.setOnClickListener(listener);
     }
 
+    public Reservation getReservation(int position) {
+        return reservations.get(position);
+    }
 
     @Override
     public int getItemCount() {
@@ -44,8 +50,11 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        public CardView cardView;
+
         public ViewHolder(View v) {
             super(v);
+            cardView = (CardView) v.findViewById(R.id.card_view);
         }
     }
 }

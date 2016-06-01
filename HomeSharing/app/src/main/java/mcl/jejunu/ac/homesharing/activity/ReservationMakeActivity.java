@@ -19,7 +19,7 @@ import java.util.Date;
 import mcl.jejunu.ac.homesharing.R;
 import mcl.jejunu.ac.homesharing.formatter.DayFormatter;
 
-public class ReservationActivity extends AppCompatActivity implements View.OnClickListener {
+public class ReservationMakeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private LinearLayout checkInLayout, checkOutLayout, peopleLayout;
     private TextView checkInText, checkOutText, peopleText, moneyText;
@@ -29,7 +29,7 @@ public class ReservationActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reservation);
+        setContentView(R.layout.activity_reservation_make);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_white_24dp);

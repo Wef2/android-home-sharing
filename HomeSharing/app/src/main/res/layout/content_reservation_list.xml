@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.ReservationListActivity"
-    tools:showIn="@layout/activity_list_reservation">
+    tools:showIn="@layout/activity_reservation_list">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"

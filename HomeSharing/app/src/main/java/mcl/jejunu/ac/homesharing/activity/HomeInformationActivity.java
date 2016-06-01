@@ -156,7 +156,7 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
                     });
             alert.show();
         } else if (v == floatingActionButton) {
-            Intent intent = new Intent(HomeInformationActivity.this, ReservationActivity.class);
+            Intent intent = new Intent(HomeInformationActivity.this, ReservationMakeActivity.class);
             startActivity(intent);
         } else if (v == moreButton) {
             Intent intent = new Intent(HomeInformationActivity.this, CommentListActivity.class);

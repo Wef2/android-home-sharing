@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activity.ReservationActivity"
-    tools:showIn="@layout/activity_reservation">
+    tools:context=".activity.ReservationMakeActivity"
+    tools:showIn="@layout/activity_reservation_make">
 
     <LinearLayout
         android:id="@+id/check_in_layout"
@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:text="금액"
+            android:text="예상 요금"
             android:textSize="25dp" />
 
         <TextView

@@ -1,20 +1,24 @@
 package mcl.jejunu.ac.homesharing.activity;
 
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
-import mcl.jejunu.ac.homesharing.R;
+import java.util.ArrayList;
 
-public class ManagementActivity extends AppCompatActivity {
+import mcl.jejunu.ac.homesharing.R;
+import mcl.jejunu.ac.homesharing.adapter.ReservationListAdapter;
+import mcl.jejunu.ac.homesharing.model.Reservation;
+
+public class ReservationInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_management);
+        setContentView(R.layout.activity_reservation_info);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_white_24dp);
@@ -25,7 +29,6 @@ public class ManagementActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
 }
