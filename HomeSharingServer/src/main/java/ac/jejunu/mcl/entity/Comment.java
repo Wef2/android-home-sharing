@@ -1,9 +1,6 @@
 package ac.jejunu.mcl.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by BK on 2016-05-29.
@@ -14,8 +11,14 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private int user_id;
-    private int home_id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "home_id")
+    private Home home;
     private String content;
 
     public Comment() {
@@ -29,20 +32,20 @@ public class Comment {
         this.id = id;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public int getHome_id() {
-        return home_id;
+    public Home getHome() {
+        return home;
     }
 
-    public void setHome_id(int home_id) {
-        this.home_id = home_id;
+    public void setHome(Home home) {
+        this.home = home;
     }
 
     public String getContent() {

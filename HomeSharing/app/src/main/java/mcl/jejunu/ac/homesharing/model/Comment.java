@@ -6,8 +6,12 @@ package mcl.jejunu.ac.homesharing.model;
 public class Comment {
 
     private int id;
-    private String writer;
-    private String letter;
+    private User user;
+    private Home home;
+    private String content;
+
+    public Comment() {
+    }
 
     public int getId() {
         return id;
@@ -17,19 +21,27 @@ public class Comment {
         this.id = id;
     }
 
-    public String getWriter() {
-        return writer;
+    public User getUser() {
+        return user;
     }
 
-    public void setWriter(String writer) {
-        this.writer = writer;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getLetter() {
-        return letter;
+    public Home getHome() {
+        return home;
     }
 
-    public void setLetter(String letter) {
-        this.letter = letter;
+    public void setHome(Home home) {
+        this.home = home;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

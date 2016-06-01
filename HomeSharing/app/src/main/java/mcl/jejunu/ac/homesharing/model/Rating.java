@@ -1,25 +1,13 @@
-package ac.jejunu.mcl.entity;
-
-import javax.persistence.*;
+package mcl.jejunu.ac.homesharing.model;
 
 /**
- * Created by BK on 2016-05-29.
+ * Created by neo-202 on 2016-06-01.
  */
-@Entity
 public class Rating {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "home_id")
     private Home home;
-
     private float score;
 
     public Rating() {

@@ -1,9 +1,9 @@
 package ac.jejunu.mcl.entity;
 
+import org.hibernate.annotations.*;
+
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
  * Created by Kim on 2016-04-23.
@@ -15,7 +15,10 @@ public class Home {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private int user_id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     private String name;
     private String description;
     private int people;
@@ -34,12 +37,12 @@ public class Home {
         this.id = id;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getName() {

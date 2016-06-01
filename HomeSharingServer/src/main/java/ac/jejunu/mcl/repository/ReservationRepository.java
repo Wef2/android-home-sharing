@@ -9,4 +9,5 @@ import java.util.List;
  * Created by neo-202 on 2016-06-01.
  */
 public interface ReservationRepository extends CrudRepository<Reservation, Integer> {
+    List<Reservation> findByHome_id(int home_id);
 }

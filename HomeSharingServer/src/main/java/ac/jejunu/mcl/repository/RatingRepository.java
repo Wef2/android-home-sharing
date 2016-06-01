@@ -9,7 +9,7 @@ import java.util.List;
  * Created by BK on 2016-05-29.
  */
 public interface RatingRepository extends CrudRepository<Rating, Integer> {
-
+    List<Rating> findByHome_id(int home_id);
 }
 
 

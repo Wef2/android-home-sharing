@@ -10,5 +10,6 @@ import java.util.List;
  */
 public interface CommentRepository extends CrudRepository<Comment, Integer> {
 
+    List<Comment> findByHome_id(int home_id);
 }
 
