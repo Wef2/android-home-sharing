@@ -133,7 +133,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
                     people = Integer.parseInt(input.getText().toString());
-                    peopleText.setText(String.valueOf(people));
+                    peopleText.setText(String.valueOf(people) + "명");
                 }
             });
             alert.show();
@@ -143,7 +143,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
                     charge = Integer.parseInt(input.getText().toString());
-                    chargeText.setText(String.valueOf(charge));
+                    chargeText.setText(String.valueOf(charge) + "원");
                 }
             });
             alert.show();
