@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 /**
  * Created by BK on 2016-05-29.
  */
-public interface RatingRepository extends CrudRepository<Rating, Long> {
+public interface RatingRepository extends CrudRepository<Rating, Integer> {
 
 }
 

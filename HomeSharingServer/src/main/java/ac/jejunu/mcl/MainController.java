@@ -3,9 +3,11 @@ package ac.jejunu.mcl;
 import ac.jejunu.mcl.entity.Comment;
 import ac.jejunu.mcl.entity.Home;
 import ac.jejunu.mcl.entity.Rating;
+import ac.jejunu.mcl.entity.User;
 import ac.jejunu.mcl.repository.CommentRepository;
 import ac.jejunu.mcl.repository.HomeRepository;
 import ac.jejunu.mcl.repository.RatingRepository;
+import ac.jejunu.mcl.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +28,16 @@ public class MainController {
     @Autowired
     private RatingRepository ratingRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
+    @RequestMapping("/users")
+    public Iterable<User> userList() {
+        return userRepository.findAll();
+    }
+
     @RequestMapping("/home/{id}")
-    public Home home(@PathVariable Long id) {
+    public Home home(@PathVariable Integer id) {
         return homeRepository.findOne(id);
     }
 

@@ -13,8 +13,8 @@ public class Rating {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private Long user_id;
-    private Long home_id;
-    private Long score;
+    private int id;
+    private int user_id;
+    private int home_id;
+    private float score;
 }

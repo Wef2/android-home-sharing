@@ -14,14 +14,12 @@ public class Home {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    private String owner_id;
+    private int id;
+    private int user_id;
     private String name;
     private String address;
+    private String description;
     private double latitude;
     private double longitude;
-    private String description;
-    private int status;
 
 }
