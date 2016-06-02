@@ -1,9 +1,11 @@
 package mcl.jejunu.ac.homesharing.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,8 +34,15 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.writerText.setText(getComment(position).getUser().getNickname());
+        holder.contentText.setText(getComment(position).getContent());
     }
 
+    public void replaceWith(Collection<Comment> comments) {
+        this.comments.clear();
+        this.comments.addAll(comments);
+        notifyDataSetChanged();
+    }
 
     public Comment getComment(int position) {
         return comments.get(position);
@@ -46,10 +55,13 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        public TextView writerText;
+        public TextView contentText;
+
         public ViewHolder(View v) {
             super(v);
-
+            writerText = (TextView) v.findViewById(R.id.writer_text);
+            contentText = (TextView) v.findViewById(R.id.content_text);
         }
     }
 }
-

@@ -10,28 +10,6 @@
     tools:context=".activity.WriteCommentActivity"
     tools:showIn="@layout/activity_write_comment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="내 점수" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="0" />
-
-    </LinearLayout>
-
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

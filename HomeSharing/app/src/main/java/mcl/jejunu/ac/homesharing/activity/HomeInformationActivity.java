@@ -1,9 +1,11 @@
 package mcl.jejunu.ac.homesharing.activity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,10 +16,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,16 +31,27 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
 import java.util.ArrayList;
 
 import mcl.jejunu.ac.homesharing.R;
 import mcl.jejunu.ac.homesharing.adapter.CommentListAdapter;
 import mcl.jejunu.ac.homesharing.adapter.ImageSliderAdapter;
 import mcl.jejunu.ac.homesharing.model.Comment;
+import mcl.jejunu.ac.homesharing.model.Home;
+import mcl.jejunu.ac.homesharing.model.User;
 
 public class HomeInformationActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
 
     private int homeId;
+    private Home myHome;
     private ViewPager viewPager;
     private ImageSliderAdapter imageSliderAdapter;
 
@@ -45,15 +60,14 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
 
     private ArrayList<Comment> comments;
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+    private CommentListAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+
+    private TextView descriptionText, peopleText, chargeText;
 
     private GoogleMap map;
 
-    private double latitude = 33.499234, longitude = 126.530714;
-    private String title = "제주시";
-
-    private Snackbar snackbar;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +91,10 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
         imageSliderAdapter = new ImageSliderAdapter(this);
         viewPager.setAdapter(imageSliderAdapter);
 
+        progressDialog = new ProgressDialog(this);
+        new HomeInformationRequestTask().execute();
+        new CommentsRequestTask().execute();
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -86,15 +104,16 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
         ratingButton = (Button) findViewById(R.id.rating_button);
         moreButton = (Button) findViewById(R.id.more_button);
 
+        descriptionText = (TextView) findViewById(R.id.description_text);
+        chargeText = (TextView) findViewById(R.id.charge_text);
+        peopleText = (TextView) findViewById(R.id.people_text);
+
         floatingActionButton.setOnClickListener(this);
         commentButton.setOnClickListener(this);
         ratingButton.setOnClickListener(this);
         moreButton.setOnClickListener(this);
 
         comments = new ArrayList<>();
-        comments.add(new Comment());
-        comments.add(new Comment());
-        comments.add(new Comment());
 
         adapter = new CommentListAdapter(comments);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -103,7 +122,6 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
-
     }
 
     @Override
@@ -115,26 +133,14 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
         } else {
 
         }
-        LatLng jeju = new LatLng(latitude, longitude);
-        map.addMarker(new MarkerOptions().position(jeju).title(title));
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(jeju, 15));
         map.setMyLocationEnabled(false);
-        map.getUiSettings().setAllGesturesEnabled(false);
-        map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                Intent intent = new Intent(HomeInformationActivity.this, MapsActivity.class);
-                intent.putExtra("latlng", latLng);
-                intent.putExtra("title", title);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
     public void onClick(View v) {
         if (v == commentButton) {
             Intent intent = new Intent(HomeInformationActivity.this, WriteCommentActivity.class);
+            intent.putExtra("id", homeId);
             startActivity(intent);
         } else if (v == ratingButton) {
             LayoutInflater layoutInflater = LayoutInflater.from(this);
@@ -157,11 +163,123 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
             alert.show();
         } else if (v == floatingActionButton) {
             Intent intent = new Intent(HomeInformationActivity.this, ReservationMakeActivity.class);
+            intent.putExtra("id", homeId);
             startActivity(intent);
         } else if (v == moreButton) {
             Intent intent = new Intent(HomeInformationActivity.this, CommentListActivity.class);
+            intent.putExtra("id", homeId);
             startActivity(intent);
         }
     }
+
+    private class HomeInformationRequestTask extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected void onPreExecute(){
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setMessage("Loading");
+            progressDialog.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                String url = "http://61.99.246.80:8080/home/"+homeId;
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                String string = restTemplate.getForObject(url, String.class);
+                return string;
+            }
+            catch (Exception e) {
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String string) {
+            try {
+                JSONObject jsonObject = new JSONObject(string);
+                myHome = new Home();
+                myHome.setId((int)jsonObject.get("id"));
+                myHome.setName((String)jsonObject.get("name"));
+                myHome.setPeople((int)jsonObject.get("people"));
+                myHome.setCharge((int)jsonObject.get("charge"));
+                myHome.setDescription((String)jsonObject.get("description"));
+                myHome.setLatitude((double)jsonObject.get("latitude"));
+                myHome.setLongitude((double)jsonObject.get("longitude"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            progressDialog.dismiss();
+
+            descriptionText.setText(myHome.getDescription());
+            chargeText.setText(String.valueOf(myHome.getCharge()) + "원");
+            peopleText.setText(String.valueOf(myHome.getPeople()) + "명");
+
+            LatLng latLng = new LatLng(myHome.getLatitude(), myHome.getLongitude());
+            map.addMarker(new MarkerOptions().position(latLng).title(myHome.getName()));
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+            map.getUiSettings().setAllGesturesEnabled(false);
+            map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                @Override
+                public void onMapClick(LatLng latLng) {
+                    Intent intent = new Intent(HomeInformationActivity.this, MapsActivity.class);
+                    intent.putExtra("latlng", latLng);
+                    intent.putExtra("title", myHome.getName());
+                    startActivity(intent);
+                }
+            });
+        }
+    }
+
+
+    private class CommentsRequestTask extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected void onPreExecute(){
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setMessage("Loading");
+            progressDialog.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                String url = "http://61.99.246.80:8080/home/"+homeId +"/comments/top3";
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                String string = restTemplate.getForObject(url, String.class);
+                return string;
+            }
+            catch (Exception e) {
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String string) {
+            try {
+                JSONArray jsonArray = new JSONArray(string);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                    Comment comment = new Comment();
+                    comment.setId((int) jsonObject.get("id"));
+                    JSONObject jsonUser = jsonObject.getJSONObject("user");
+                    User user = new User();
+                    user.setNickname(jsonUser.getString("nickname"));
+                    comment.setUser(user);
+                    comment.setContent((String) jsonObject.get("content"));
+                    comments.add(comment);
+                }
+                adapter.replaceWith(comments);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            progressDialog.dismiss();
+        }
+    }
+
 
 }

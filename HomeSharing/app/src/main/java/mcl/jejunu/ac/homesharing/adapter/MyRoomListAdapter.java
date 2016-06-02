@@ -39,6 +39,12 @@ public class MyRoomListAdapter extends RecyclerView.Adapter<MyRoomListAdapter.Vi
         holder.cardView.setOnClickListener(listener);
     }
 
+    public void replaceWith(Collection<Home> homes) {
+        this.homes.clear();
+        this.homes.addAll(homes);
+        notifyDataSetChanged();
+    }
+
     public Home getHome(int position) {
         return homes.get(position);
     }

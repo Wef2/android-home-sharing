@@ -38,6 +38,15 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.cardView.setTag(getHome(position));
         holder.cardView.setOnClickListener(listener);
+        holder.nameText.setText(getHome(position).getName());
+        holder.peopleText.setText(String.valueOf(getHome(position).getPeople()) + "명");
+        holder.chargeText.setText(String.valueOf(getHome(position).getCharge()) + "원");
+    }
+
+    public void replaceWith(Collection<Home> homes) {
+        this.homes.clear();
+        this.homes.addAll(homes);
+        notifyDataSetChanged();
     }
 
     public Home getHome(int position) {
@@ -52,18 +61,16 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public CardView cardView;
-        public TextView locationText;
-        public TextView priceText;
-        public TextView sizeText;
-        public TextView ratingText;
+        public TextView nameText;
+        public TextView chargeText;
+        public TextView peopleText;
 
         public ViewHolder(View v) {
             super(v);
             cardView = (CardView) v.findViewById(R.id.card_view);
-            locationText = (TextView) v.findViewById(R.id.location_text);
-            priceText = (TextView) v.findViewById(R.id.price_text);
-            sizeText = (TextView) v.findViewById(R.id.size_text);
-            ratingText = (TextView) v.findViewById(R.id.rating_text);
+            nameText = (TextView) v.findViewById(R.id.name_text);
+            chargeText = (TextView) v.findViewById(R.id.charge_text);
+            peopleText = (TextView) v.findViewById(R.id.people_text);
         }
     }
 }
