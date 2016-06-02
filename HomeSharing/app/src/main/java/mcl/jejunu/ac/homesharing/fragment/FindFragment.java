@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import mcl.jejunu.ac.homesharing.R;
 import mcl.jejunu.ac.homesharing.activity.HomeInformationActivity;
 import mcl.jejunu.ac.homesharing.adapter.HomeListAdapter;
+import mcl.jejunu.ac.homesharing.model.Filedata;
 import mcl.jejunu.ac.homesharing.model.Home;
 
 /**
@@ -94,6 +95,10 @@ public class FindFragment extends Fragment implements View.OnClickListener {
                     JSONObject jsonObject = (JSONObject) jsonArray.get(i);
                     Home home = new Home();
                     home.setId((int) jsonObject.get("id"));
+                    JSONObject filedataObject = jsonObject.getJSONObject("filedata");
+                    Filedata filedata = new Filedata();
+                    filedata.setId(filedataObject.getInt("id"));
+                    home.setFiledata(filedata);
                     home.setName((String) jsonObject.get("name"));
                     home.setPeople((int) jsonObject.get("people"));
                     home.setCharge((int) jsonObject.get("charge"));

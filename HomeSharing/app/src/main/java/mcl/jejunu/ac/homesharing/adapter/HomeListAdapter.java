@@ -5,7 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,8 +20,11 @@ import mcl.jejunu.ac.homesharing.model.Home;
  * Created by Kim on 2016-05-06.
  */
 public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHolder> {
+
     private ArrayList<Home> homes;
     private View.OnClickListener listener;
+
+    private String url = "http://61.99.246.80:8080/image/";
 
     public HomeListAdapter(Collection<Home> homeModels, View.OnClickListener listener) {
         homes = new ArrayList<>();
@@ -41,6 +47,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
         holder.nameText.setText(getHome(position).getName());
         holder.peopleText.setText(String.valueOf(getHome(position).getPeople()) + "명");
         holder.chargeText.setText(String.valueOf(getHome(position).getCharge()) + "원");
+        Picasso.with(holder.imageView.getContext()).load(url + getHome(position).getFiledata().getId()).into(holder.imageView);
     }
 
     public void replaceWith(Collection<Home> homes) {
@@ -61,6 +68,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public CardView cardView;
+        public ImageView imageView;
         public TextView nameText;
         public TextView chargeText;
         public TextView peopleText;
@@ -68,6 +76,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
         public ViewHolder(View v) {
             super(v);
             cardView = (CardView) v.findViewById(R.id.card_view);
+            imageView = (ImageView) v.findViewById(R.id.image_view);
             nameText = (TextView) v.findViewById(R.id.name_text);
             chargeText = (TextView) v.findViewById(R.id.charge_text);
             peopleText = (TextView) v.findViewById(R.id.people_text);

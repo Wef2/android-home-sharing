@@ -43,6 +43,14 @@ public class Home {
         return user;
     }
 
+    public Filedata getFiledata() {
+        return filedata;
+    }
+
+    public void setFiledata(Filedata filedata) {
+        this.filedata = filedata;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }

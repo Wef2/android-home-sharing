@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +47,7 @@ import mcl.jejunu.ac.homesharing.R;
 import mcl.jejunu.ac.homesharing.adapter.CommentListAdapter;
 import mcl.jejunu.ac.homesharing.adapter.ImageSliderAdapter;
 import mcl.jejunu.ac.homesharing.model.Comment;
+import mcl.jejunu.ac.homesharing.model.Filedata;
 import mcl.jejunu.ac.homesharing.model.Home;
 import mcl.jejunu.ac.homesharing.model.User;
 
@@ -61,10 +64,13 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
     private CommentListAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    private ImageView imageView;
     private TextView descriptionText, peopleText, chargeText, ratingText;
 
     private GoogleMap map;
     private ProgressDialog progressDialog;
+
+    private String imageUrl = "http://61.99.246.80:8080/image/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +103,8 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
         commentButton = (Button) findViewById(R.id.comment_button);
         ratingButton = (Button) findViewById(R.id.rating_button);
         moreButton = (Button) findViewById(R.id.more_button);
+
+        imageView = (ImageView) findViewById(R.id.image_view);
 
         descriptionText = (TextView) findViewById(R.id.description_text);
         chargeText = (TextView) findViewById(R.id.charge_text);
@@ -195,6 +203,8 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
         protected void onPostExecute(String string) {
             try {
                 JSONObject jsonObject = new JSONObject(string);
+                Log.i("json", jsonObject.toString());
+
                 myHome = new Home();
                 myHome.setId(jsonObject.getInt("id"));
                 myHome.setName(jsonObject.getString("name"));
@@ -203,6 +213,12 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
                 myHome.setDescription(jsonObject.getString("description"));
                 myHome.setLatitude(jsonObject.getDouble("latitude"));
                 myHome.setLongitude(jsonObject.getDouble("longitude"));
+
+                JSONObject filedataObject = jsonObject.getJSONObject("filedata");
+                Log.i("json", filedataObject.toString());
+                Filedata filedata = new Filedata();
+                filedata.setId(filedataObject.getInt("id"));
+                myHome.setFiledata(filedata);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -210,6 +226,7 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
             descriptionText.setText(myHome.getDescription());
             chargeText.setText(String.valueOf(myHome.getCharge()) + "원");
             peopleText.setText(String.valueOf(myHome.getPeople()) + "명");
+            Picasso.with(imageView.getContext()).load(imageUrl + myHome.getFiledata().getFilename()).into(imageView);
 
             LatLng latLng = new LatLng(myHome.getLatitude(), myHome.getLongitude());
             map.addMarker(new MarkerOptions().position(latLng).title(myHome.getName()));
