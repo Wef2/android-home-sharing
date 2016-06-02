@@ -63,10 +63,9 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
     private CommentListAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    private TextView descriptionText, peopleText, chargeText;
+    private TextView descriptionText, peopleText, chargeText, ratingText;
 
     private GoogleMap map;
-
     private ProgressDialog progressDialog;
 
     @Override
@@ -94,6 +93,7 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
         progressDialog = new ProgressDialog(this);
         new HomeInformationRequestTask().execute();
         new CommentsRequestTask().execute();
+        new AverageRatingRequestTask().execute();
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -107,6 +107,7 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
         descriptionText = (TextView) findViewById(R.id.description_text);
         chargeText = (TextView) findViewById(R.id.charge_text);
         peopleText = (TextView) findViewById(R.id.people_text);
+        ratingText = (TextView) findViewById(R.id.rating_text);
 
         floatingActionButton.setOnClickListener(this);
         commentButton.setOnClickListener(this);
@@ -201,17 +202,16 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
             try {
                 JSONObject jsonObject = new JSONObject(string);
                 myHome = new Home();
-                myHome.setId((int)jsonObject.get("id"));
-                myHome.setName((String)jsonObject.get("name"));
-                myHome.setPeople((int)jsonObject.get("people"));
-                myHome.setCharge((int)jsonObject.get("charge"));
-                myHome.setDescription((String)jsonObject.get("description"));
-                myHome.setLatitude((double)jsonObject.get("latitude"));
-                myHome.setLongitude((double)jsonObject.get("longitude"));
+                myHome.setId(jsonObject.getInt("id"));
+                myHome.setName(jsonObject.getString("name"));
+                myHome.setPeople(jsonObject.getInt("people"));
+                myHome.setCharge(jsonObject.getInt("charge"));
+                myHome.setDescription(jsonObject.getString("description"));
+                myHome.setLatitude(jsonObject.getDouble("latitude"));
+                myHome.setLongitude(jsonObject.getDouble("longitude"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            progressDialog.dismiss();
 
             descriptionText.setText(myHome.getDescription());
             chargeText.setText(String.valueOf(myHome.getCharge()) + "원");
@@ -235,14 +235,6 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
 
 
     private class CommentsRequestTask extends AsyncTask<Void, Void, String> {
-
-        @Override
-        protected void onPreExecute(){
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            progressDialog.setMessage("Loading");
-            progressDialog.show();
-            super.onPreExecute();
-        }
 
         @Override
         protected String doInBackground(Void... params) {
@@ -276,6 +268,30 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
                 adapter.replaceWith(comments);
             } catch (JSONException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    private class AverageRatingRequestTask extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                String url = "http://61.99.246.80:8080/rating/home/"+homeId +"/average";
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                String string = restTemplate.getForObject(url, String.class);
+                return string;
+            }
+            catch (Exception e) {
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String string) {
+            if(!(string == null)){
+                ratingText.setText(string);
             }
             progressDialog.dismiss();
         }

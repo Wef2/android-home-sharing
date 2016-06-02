@@ -10,7 +10,6 @@
     tools:showIn="@layout/activity_reservation_info">
 
     <LinearLayout
-        android:id="@+id/check_in_layout"
         android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,17 +23,16 @@
             android:textSize="25dp" />
 
         <TextView
-            android:id="@+id/checkInText"
+            android:id="@+id/check_in_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="날짜 선택"
+            android:text="2016-01-01"
             android:textSize="20dp"
             android:textColor="#444444"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/check_out_layout"
         android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,10 +46,10 @@
             android:textSize="25dp" />
 
         <TextView
-            android:id="@+id/checkOutText"
+            android:id="@+id/check_out_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="날짜 선택"
+            android:text="2016-01-01"
             android:textSize="20dp"
             android:textColor="#444444"/>
 
@@ -72,7 +70,7 @@
             android:textSize="25dp" />
 
         <TextView
-            android:id="@+id/peopleText"
+            android:id="@+id/people_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1명"
@@ -96,7 +94,7 @@
             android:textSize="25dp" />
 
         <TextView
-            android:id="@+id/moneyText"
+            android:id="@+id/charge_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0원"

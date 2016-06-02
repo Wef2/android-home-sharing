@@ -1,10 +1,13 @@
 package mcl.jejunu.ac.homesharing.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +16,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 
@@ -26,10 +34,16 @@ public class ReservationMakeActivity extends AppCompatActivity implements View.O
     private Date checkIn, checkOut;
     private int people, money;
 
+    private int userId = 2;
+    private int homeId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation_make);
+
+        Intent intent = getIntent();
+        homeId = intent.getIntExtra("id", 0);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_white_24dp);
@@ -64,6 +78,7 @@ public class ReservationMakeActivity extends AppCompatActivity implements View.O
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_done:
+                new MakeReservationTask().execute();
                 super.onBackPressed();
                 return true;
         }
@@ -130,5 +145,42 @@ public class ReservationMakeActivity extends AppCompatActivity implements View.O
             });
             alert.show();
         }
+    }
+
+    private class MakeReservationTask extends AsyncTask<Void, Void, String> {
+
+        private MultiValueMap<String, String> message;
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            message = new LinkedMultiValueMap<String, String>();
+            message.add("user_id", String.valueOf(userId));
+            message.add("home_id", String.valueOf(homeId));
+            message.add("check_in", String.valueOf(checkIn));
+            message.add("check_out", String.valueOf(checkOut));
+            message.add("people", String.valueOf(people));
+            Log.i("Message", message.toString());
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                String url = "http://61.99.246.80:8080/reservation/add";
+                RestTemplate restTemplate = new RestTemplate(true);
+                ResponseEntity<String> response = restTemplate.postForEntity(url, message, String.class);
+                return response.getBody();
+            }
+            catch (Exception e) {
+
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result){
+            Log.i("Result", result);
+        }
+
     }
 }

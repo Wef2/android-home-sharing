@@ -99,12 +99,12 @@ public class CommentListActivity extends AppCompatActivity {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = (JSONObject) jsonArray.get(i);
                     Comment comment = new Comment();
-                    comment.setId((int) jsonObject.get("id"));
+                    comment.setId(jsonObject.getInt("id"));
                     JSONObject jsonUser = jsonObject.getJSONObject("user");
                     User user = new User();
                     user.setNickname(jsonUser.getString("nickname"));
                     comment.setUser(user);
-                    comment.setContent((String) jsonObject.get("content"));
+                    comment.setContent(jsonObject.getString("content"));
                     comments.add(comment);
                 }
                 adapter.replaceWith(comments);

@@ -12,6 +12,7 @@ public class Reservation {
     private Home home;
     private Date check_in;
     private Date check_out;
+    private int people;
 
     public Reservation() {
     }
@@ -54,5 +55,13 @@ public class Reservation {
 
     public void setCheck_out(Date check_out) {
         this.check_out = check_out;
+    }
+
+    public int getPeople() {
+        return people;
+    }
+
+    public void setPeople(int people) {
+        this.people = people;
     }
 }

@@ -7,11 +7,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +30,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,6 +45,8 @@ import mcl.jejunu.ac.homesharing.R;
  * Created by neo-202 on 2016-05-26.
  */
 public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMapClickListener {
+
+    private int userId = 2;
 
     private static final int REQUEST_CODE = 1;
     private static final int REQUEST_LOCATION = 2;
@@ -186,6 +195,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_done:
+                new AddHomeTask().execute();
                 super.onBackPressed();
                 return true;
         }
@@ -212,6 +222,44 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     public void onMapClick(LatLng latLng) {
         Intent intent = new Intent(RegistrationActivity.this, SelectLocationActivity.class);
         startActivityForResult(intent, REQUEST_LOCATION);
+    }
+
+    private class AddHomeTask extends AsyncTask<Void, Void, String> {
+
+        private MultiValueMap<String, String> message;
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            message = new LinkedMultiValueMap<String, String>();
+            message.add("user_id", String.valueOf(userId));
+            message.add("name", name);
+            message.add("description", description);
+            message.add("people", String.valueOf(people));
+            message.add("charge", String.valueOf(charge));
+            message.add("latitude", String.valueOf(latLng.latitude));
+            message.add("longitude", String.valueOf(latLng.longitude));
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                String url = "http://61.99.246.80:8080/home/add";
+                RestTemplate restTemplate = new RestTemplate(true);
+                ResponseEntity<String> response = restTemplate.postForEntity(url, message, String.class);
+                return response.getBody();
+            }
+            catch (Exception e) {
+
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result){
+            Log.i("Result", result);
+        }
+
     }
 
 }

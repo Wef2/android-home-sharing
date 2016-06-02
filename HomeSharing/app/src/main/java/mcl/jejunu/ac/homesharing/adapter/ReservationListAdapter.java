@@ -48,6 +48,12 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
         return reservations.size();
     }
 
+    public void replaceWith(Collection<Reservation> reservations) {
+        this.reservations.clear();
+        this.reservations.addAll(reservations);
+        notifyDataSetChanged();
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public CardView cardView;

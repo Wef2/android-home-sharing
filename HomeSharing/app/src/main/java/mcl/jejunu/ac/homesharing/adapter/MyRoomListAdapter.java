@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,6 +38,9 @@ public class MyRoomListAdapter extends RecyclerView.Adapter<MyRoomListAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.cardView.setTag(getHome(position));
         holder.cardView.setOnClickListener(listener);
+        holder.nameText.setText(getHome(position).getName());
+        holder.peopleText.setText(getHome(position).getPeople() + "명");
+        holder.chargeText.setText(getHome(position).getCharge() + "원");
     }
 
     public void replaceWith(Collection<Home> homes) {
@@ -57,10 +61,16 @@ public class MyRoomListAdapter extends RecyclerView.Adapter<MyRoomListAdapter.Vi
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public CardView cardView;
+        public TextView nameText;
+        public TextView peopleText;
+        public TextView chargeText;
 
         public ViewHolder(View v) {
             super(v);
             cardView = (CardView) v.findViewById(R.id.card_view);
+            nameText = (TextView) v.findViewById(R.id.name_text);
+            peopleText = (TextView) v.findViewById(R.id.people_text);
+            chargeText = (TextView) v.findViewById(R.id.charge_text);
         }
     }
 }
