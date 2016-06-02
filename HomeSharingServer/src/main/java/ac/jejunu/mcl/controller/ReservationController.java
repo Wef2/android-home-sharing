@@ -43,8 +43,8 @@ public class ReservationController {
         Reservation reservation = new Reservation();
         reservation.setUser(userRepository.findOne(user_id));
         reservation.setHome(homeRepository.findOne(home_id));
-        reservation.setCheck_in(new Date(check_in));
-        reservation.setCheck_in(new Date(check_out));
+        reservation.setCheck_in(check_in);
+        reservation.setCheck_out(check_out);
         reservation.setPeople(people);
         return reservationRepository.save(reservation);
     }

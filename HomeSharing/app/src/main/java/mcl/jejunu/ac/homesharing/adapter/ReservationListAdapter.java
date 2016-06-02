@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,6 +38,9 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.cardView.setTag(getReservation(position));
         holder.cardView.setOnClickListener(listener);
+        holder.checkInText.setText(getReservation(position).getCheck_in());
+        holder.checkOutText.setText(getReservation(position).getCheck_out());
+        holder.peopleText.setText(String.valueOf(getReservation(position).getPeople()));
     }
 
     public Reservation getReservation(int position) {
@@ -57,10 +61,16 @@ public class ReservationListAdapter extends RecyclerView.Adapter<ReservationList
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public CardView cardView;
+        public TextView checkInText;
+        public TextView checkOutText;
+        public TextView peopleText;
 
         public ViewHolder(View v) {
             super(v);
             cardView = (CardView) v.findViewById(R.id.card_view);
+            checkInText = (TextView) v.findViewById(R.id.check_in_text);
+            checkOutText = (TextView) v.findViewById(R.id.check_out_text);
+            peopleText = (TextView) v.findViewById(R.id.people_text);
         }
     }
 }

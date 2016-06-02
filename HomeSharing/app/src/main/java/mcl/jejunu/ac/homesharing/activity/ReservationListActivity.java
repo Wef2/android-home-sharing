@@ -44,7 +44,7 @@ public class ReservationListActivity extends AppCompatActivity implements View.O
         setContentView(R.layout.activity_reservation_list);
 
         Intent intent = getIntent();
-        intent.getIntExtra("id", 0);
+        homeId = intent.getIntExtra("id", 0);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_white_24dp);
@@ -112,8 +112,8 @@ public class ReservationListActivity extends AppCompatActivity implements View.O
                     User user = new User();
                     user.setNickname(jsonUser.getString("nickname"));
                     reservation.setUser(user);
-                    reservation.setCheck_in((Date) jsonObject.get("check_in"));
-                    reservation.setCheck_out((Date) jsonObject.get("check_out"));
+                    reservation.setCheck_in(jsonObject.getString("check_in"));
+                    reservation.setCheck_out(jsonObject.getString("check_out"));
                     reservation.setPeople(jsonObject.getInt("people"));
                     reservations.add(reservation);
                 }

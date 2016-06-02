@@ -22,8 +22,8 @@ public class Reservation {
     private Home home;
 
     private int people;
-    private Date check_in;
-    private Date check_out;
+    private String check_in;
+    private String check_out;
 
     public Reservation() {
     }
@@ -60,19 +60,19 @@ public class Reservation {
         this.people = people;
     }
 
-    public Date getCheck_in() {
+    public String getCheck_in() {
         return check_in;
     }
 
-    public void setCheck_in(Date check_in) {
+    public void setCheck_in(String check_in) {
         this.check_in = check_in;
     }
 
-    public Date getCheck_out() {
+    public String getCheck_out() {
         return check_out;
     }
 
-    public void setCheck_out(Date check_out) {
+    public void setCheck_out(String check_out) {
         this.check_out = check_out;
     }
 }

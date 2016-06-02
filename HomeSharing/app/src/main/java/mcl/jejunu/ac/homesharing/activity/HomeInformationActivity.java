@@ -52,8 +52,6 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
 
     private int homeId;
     private Home myHome;
-    private ViewPager viewPager;
-    private ImageSliderAdapter imageSliderAdapter;
 
     private FloatingActionButton floatingActionButton;
     private Button commentButton, ratingButton, moreButton;
@@ -85,10 +83,6 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
                 finish();
             }
         });
-
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
-        imageSliderAdapter = new ImageSliderAdapter(this);
-        viewPager.setAdapter(imageSliderAdapter);
 
         progressDialog = new ProgressDialog(this);
         new HomeInformationRequestTask().execute();
@@ -291,7 +285,7 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
         @Override
         protected void onPostExecute(String string) {
             if(!(string == null)){
-                ratingText.setText(string);
+                ratingText.setText(string + "점");
             }
             progressDialog.dismiss();
         }

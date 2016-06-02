@@ -7,6 +7,7 @@ public class User {
 
     private int id;
     private String nickname;
+    private String description;
 
     public User(){
 
@@ -32,4 +33,15 @@ public class User {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
+
+
+

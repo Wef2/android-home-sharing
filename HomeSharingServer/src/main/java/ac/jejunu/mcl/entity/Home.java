@@ -1,9 +1,6 @@
 package ac.jejunu.mcl.entity;
 
-import org.hibernate.annotations.*;
-
 import javax.persistence.*;
-import javax.persistence.Entity;
 
 /**
  * Created by Kim on 2016-04-23.
@@ -19,6 +16,11 @@ public class Home {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToOne
+    @JoinColumn(name = "file_id")
+    private Filedata filedata;
+
     private String name;
     private String description;
     private int people;

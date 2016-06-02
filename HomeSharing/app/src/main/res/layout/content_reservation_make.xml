@@ -81,28 +81,4 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/money_layout"
-        android:layout_margin="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:text="예상 요금"
-            android:textSize="25dp" />
-
-        <TextView
-            android:id="@+id/moneyText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0원"
-            android:textSize="20dp"
-            android:textColor="#444444"/>
-
-    </LinearLayout>
-
 </LinearLayout>

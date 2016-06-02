@@ -20,19 +20,21 @@
             android:src="@drawable/profile_sample" />
 
         <TextView
+            android:id="@+id/nickname_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="25dp"
-            android:text="김보경"
+            android:text="이름"
             android:textColor="#111111"/>
 
         <TextView
+            android:id="@+id/description_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="20dp"
-            android:text="안녕하세요"/>
+            android:text="인사말"/>
 
     </LinearLayout>
 

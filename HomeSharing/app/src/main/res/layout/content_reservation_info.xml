@@ -9,6 +9,48 @@
     tools:context=".activity.ReservationInfoActivity"
     tools:showIn="@layout/activity_reservation_info">
 
+
+    <LinearLayout
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="예약자"
+            android:textSize="25dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="16dp">
+
+            <com.pkmmte.view.CircularImageView
+                android:layout_marginRight="10dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="fitXY"
+                app:border="true"
+                app:shadow="false"
+                android:src="@drawable/profile_sample" />
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/nickname_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="닉네임"
+                    android:textColor="#111111"
+                    android:textSize="30dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_margin="16dp"
         android:layout_width="match_parent"
@@ -85,21 +127,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:text="예상 요금"
-            android:textSize="25dp" />
-
-        <TextView
-            android:id="@+id/charge_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0원"
-            android:textSize="20dp"
-            android:textColor="#444444"/>
 
     </LinearLayout>
 

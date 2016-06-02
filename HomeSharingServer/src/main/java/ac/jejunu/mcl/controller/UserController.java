@@ -21,6 +21,11 @@ public class UserController {
     @Autowired
     private HomeRepository homeRepository;
 
+    @RequestMapping("/user/{id}")
+    public User user(@PathVariable("id") int id) {
+        return userRepository.findOne(id);
+    }
+
     @RequestMapping("/users")
     public Iterable<User> users(){
         return userRepository.findAll();

@@ -7,6 +7,7 @@ public class Home {
 
     private int id;
     private User user;
+    private Filedata filedata;
     private String name;
     private String description;
     private int people;
@@ -31,6 +32,14 @@ public class Home {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Filedata getFiledata() {
+        return filedata;
+    }
+
+    public void setFiledata(Filedata filedata) {
+        this.filedata = filedata;
     }
 
     public String getName() {

@@ -30,9 +30,9 @@ import mcl.jejunu.ac.homesharing.formatter.DayFormatter;
 public class ReservationMakeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private LinearLayout checkInLayout, checkOutLayout, peopleLayout;
-    private TextView checkInText, checkOutText, peopleText, moneyText;
+    private TextView checkInText, checkOutText, peopleText;
     private Date checkIn, checkOut;
-    private int people, money;
+    private int people;
 
     private int userId = 2;
     private int homeId;
@@ -64,7 +64,6 @@ public class ReservationMakeActivity extends AppCompatActivity implements View.O
 
         checkInText = (TextView) findViewById(R.id.checkInText);
         checkOutText = (TextView) findViewById(R.id.checkOutText);
-        moneyText = (TextView) findViewById(R.id.moneyText);
         peopleText = (TextView) findViewById(R.id.peopleText);
     }
 
@@ -140,7 +139,7 @@ public class ReservationMakeActivity extends AppCompatActivity implements View.O
             alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
                     people = Integer.parseInt(input.getText().toString());
-                    peopleText.setText(String.valueOf(people));
+                    peopleText.setText(people + "명");
                 }
             });
             alert.show();
@@ -157,8 +156,8 @@ public class ReservationMakeActivity extends AppCompatActivity implements View.O
             message = new LinkedMultiValueMap<String, String>();
             message.add("user_id", String.valueOf(userId));
             message.add("home_id", String.valueOf(homeId));
-            message.add("check_in", String.valueOf(checkIn));
-            message.add("check_out", String.valueOf(checkOut));
+            message.add("check_in", DayFormatter.format(checkIn));
+            message.add("check_out", DayFormatter.format(checkOut));
             message.add("people", String.valueOf(people));
             Log.i("Message", message.toString());
         }

@@ -23,7 +23,7 @@ public class ReservationInfoActivity extends AppCompatActivity {
 
     private int reservationId;
 
-    private TextView checkInText, checkOutText, peopleText;
+    private TextView checkInText, checkOutText, peopleText, nicknameText;
 
     private ProgressDialog progressDialog;
 
@@ -48,6 +48,7 @@ public class ReservationInfoActivity extends AppCompatActivity {
         checkInText = (TextView) findViewById(R.id.check_in_text);
         checkOutText = (TextView) findViewById(R.id.check_out_text);
         peopleText = (TextView) findViewById(R.id.people_text);
+        nicknameText = (TextView) findViewById(R.id.nickname_text);
 
         progressDialog = new ProgressDialog(this);
         new ReservationInfoRequestTask().execute();
@@ -81,9 +82,10 @@ public class ReservationInfoActivity extends AppCompatActivity {
             try {
                 JSONObject jsonObject = new JSONObject(string);
                 JSONObject jsonUser = jsonObject.getJSONObject("user");
-                checkInText.setText(DayFormatter.format((Date) jsonObject.get("check_in")));
-                checkOutText.setText(DayFormatter.format((Date) jsonObject.get("check_out")));
-                peopleText.setText(jsonObject.getInt("people"));
+                checkInText.setText(jsonObject.getString("check_in"));
+                checkOutText.setText(jsonObject.getString("check_out"));
+                peopleText.setText(jsonObject.getInt("people") + "명");
+                nicknameText.setText(jsonUser.getString("nickname"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }

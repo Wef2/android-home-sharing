@@ -5,10 +5,13 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -30,14 +33,25 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.FormHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 
 import mcl.jejunu.ac.homesharing.R;
 
@@ -60,6 +74,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     private ImageView imageView;
     private Bitmap bitmap;
+    private File imageFile;
     private LinearLayout nameLayout, descriptionLayout, peoepleLayout, chargeLayout;
     private TextView nameText, descriptionText, peopleText, chargeText;
 
@@ -167,6 +182,9 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 }
                 InputStream stream = getContentResolver().openInputStream(
                         data.getData());
+                Uri uri = data.getData();
+                String imagePath = getRealPathFromURI(uri);
+                imageFile = new File(imagePath);
                 bitmap = BitmapFactory.decodeStream(stream);
                 stream.close();
                 imageView.setImageBitmap(bitmap);
@@ -195,7 +213,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_done:
-                new AddHomeTask().execute();
+//                new AddHomeTask().execute();
+                new AddImageTask().execute();
                 super.onBackPressed();
                 return true;
         }
@@ -260,6 +279,68 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             Log.i("Result", result);
         }
 
+    }
+
+    private class AddImageTask extends AsyncTask<Void, Void, String> {
+
+        private MultiValueMap<String, Object> message;
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            message = new LinkedMultiValueMap<String, Object>();
+            message.add("file", new FileSystemResource(imageFile));
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+            try {
+                FormHttpMessageConverter formHttpMessageConverter = new FormHttpMessageConverter();
+                formHttpMessageConverter.setCharset(Charset.forName("UTF8"));
+
+
+                RestTemplate restTemplate = new RestTemplate();
+
+
+                restTemplate.getMessageConverters().add(formHttpMessageConverter);
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+                restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
+
+                String uri = "http://61.99.246.80:8080/upload";
+
+                MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+                map.add("file", new FileSystemResource(imageFile));
+                map.add("filename", imageFile.getName());
+
+                HttpHeaders imageHeaders = new HttpHeaders();
+                imageHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+                HttpEntity<MultiValueMap<String, Object>> imageEntity = new HttpEntity<MultiValueMap<String, Object>>(map, imageHeaders);
+
+                String string = restTemplate.postForObject(uri, imageEntity, String.class);
+                return string;
+            }
+            catch (Exception e){
+
+            }
+            return "";
+        }
+
+        @Override
+        protected void onPostExecute(String result){
+            Log.i("Result", result);
+        }
+
+    }
+
+    public String getRealPathFromURI(Uri contentUri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = managedQuery(contentUri, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
     }
 
 }
