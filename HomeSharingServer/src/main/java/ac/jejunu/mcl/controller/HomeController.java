@@ -34,24 +34,28 @@ public class HomeController {
         return homeRepository.findOne(id);
     }
 
-    @RequestMapping("/home/list")
+    @RequestMapping("/homes")
     public Iterable<Home> homeList() {
         return homeRepository.findAll();
     }
 
     @RequestMapping(path = "/home/add", method = RequestMethod.POST)
-    public void addHome(@RequestParam int id, @RequestParam String name, @RequestParam String description,
-                        @RequestParam int people, @RequestParam int charge,
-                        @RequestParam double latitude, @RequestParam double longitude){
+    public Home addHome(@RequestParam(value = "user_id") int user_id,
+                        @RequestParam(value = "name") String name,
+                        @RequestParam(value = "description") String description,
+                        @RequestParam(value = "people") int people,
+                        @RequestParam(value = "charge") int charge,
+                        @RequestParam(value = "latitude") double latitude,
+                        @RequestParam(value = "longitude") double longitude){
         Home home = new Home();
-        home.setUser(userRepository.findOne(id));
+        home.setUser(userRepository.findOne(user_id));
         home.setName(name);
         home.setDescription(description);
         home.setPeople(people);
         home.setCharge(charge);
         home.setLatitude(latitude);
         home.setLongitude(longitude);
-        homeRepository.save(home);
+        return homeRepository.save(home);
     }
 
     @RequestMapping(path = "/home/{id}/ratings", method = RequestMethod.GET)
@@ -62,6 +66,11 @@ public class HomeController {
     @RequestMapping(path = "/home/{id}/comments", method = RequestMethod.GET)
     public Iterable<Comment> getCommentsById(@PathVariable int id){
         return commentRepository.findByHome_id(id);
+    }
+
+    @RequestMapping(path = "/home/{id}/comments/top3", method = RequestMethod.GET)
+    public Iterable<Comment> getCommentsTopThreeById(@PathVariable int id){
+        return commentRepository.findTop3ByHome_id(id);
     }
 
     @RequestMapping(path = "/home/{id}/reservations", method = RequestMethod.GET)

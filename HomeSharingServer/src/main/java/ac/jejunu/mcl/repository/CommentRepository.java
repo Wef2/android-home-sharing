@@ -1,6 +1,7 @@
 package ac.jejunu.mcl.repository;
 
 import ac.jejunu.mcl.entity.Comment;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
  */
 public interface CommentRepository extends CrudRepository<Comment, Integer> {
 
+    List<Comment> findTop3ByHome_id(int home_id);
     List<Comment> findByHome_id(int home_id);
 }
 

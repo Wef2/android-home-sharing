@@ -31,11 +31,16 @@ public class CommentController {
     }
 
     @RequestMapping(path = "/comment/add", method = RequestMethod.POST)
-    public void addComment(@RequestParam int user_id, @RequestParam int home_id, @RequestParam String content) {
+    public Comment addComment(@RequestParam(value = "user_id") int user_id,
+                           @RequestParam(value = "home_id") int home_id,
+                           @RequestParam(value = "content") String content) {
         Comment comment = new Comment();
         comment.setUser(userRepository.findOne(user_id));
         comment.setHome(homeRepository.findOne(home_id));
         comment.setContent(content);
-        commentRepository.save(comment);
+        System.out.println(user_id);
+        System.out.println(home_id);
+        System.out.println(content);
+        return commentRepository.save(comment);
     }
 }

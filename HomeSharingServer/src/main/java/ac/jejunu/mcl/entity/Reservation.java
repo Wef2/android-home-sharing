@@ -21,7 +21,8 @@ public class Reservation {
     @JoinColumn(name = "home_id")
     private Home home;
 
-        private Date check_in;
+    private int people;
+    private Date check_in;
     private Date check_out;
 
     public Reservation() {
@@ -49,6 +50,14 @@ public class Reservation {
 
     public void setHome(Home home) {
         this.home = home;
+    }
+
+    public int getPeople() {
+        return people;
+    }
+
+    public void setPeople(int people) {
+        this.people = people;
     }
 
     public Date getCheck_in() {
