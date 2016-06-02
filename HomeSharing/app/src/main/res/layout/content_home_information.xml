@@ -166,7 +166,6 @@
                 android:textColor="#444444"
                 android:textSize="15dp" />
 
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -202,7 +201,6 @@
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
-
 
         </LinearLayout>
 

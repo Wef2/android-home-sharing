@@ -49,7 +49,6 @@ public class FindFragment extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-
         progressDialog = new ProgressDialog(getActivity());
         new HomeListRequestTask().execute();
         return view;

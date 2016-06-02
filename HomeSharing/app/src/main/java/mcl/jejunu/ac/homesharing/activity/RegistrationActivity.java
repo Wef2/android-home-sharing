@@ -33,6 +33,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -213,8 +216,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_done:
-//                new AddHomeTask().execute();
-                new AddImageTask().execute();
+                new AddHomeTask().execute();
                 super.onBackPressed();
                 return true;
         }
@@ -277,11 +279,23 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         @Override
         protected void onPostExecute(String result){
             Log.i("Result", result);
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                new AddImageTask(jsonObject.getInt("id")).execute();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
     }
 
     private class AddImageTask extends AsyncTask<Void, Void, String> {
+
+        private int homeId;
+
+        public AddImageTask(int homeId){
+            this.homeId = homeId;
+        }
 
         private MultiValueMap<String, Object> message;
 
@@ -299,16 +313,14 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 FormHttpMessageConverter formHttpMessageConverter = new FormHttpMessageConverter();
                 formHttpMessageConverter.setCharset(Charset.forName("UTF8"));
 
-
                 RestTemplate restTemplate = new RestTemplate();
-
 
                 restTemplate.getMessageConverters().add(formHttpMessageConverter);
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
                 restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
 
-                String uri = "http://61.99.246.80:8080/upload";
+                String uri = "http://61.99.246.80:8080/imageupload/home/"+homeId;
 
                 MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
                 map.add("file", new FileSystemResource(imageFile));

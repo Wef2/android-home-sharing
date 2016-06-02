@@ -36,11 +36,15 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import mcl.jejunu.ac.homesharing.R;
@@ -53,6 +57,7 @@ import mcl.jejunu.ac.homesharing.model.User;
 
 public class HomeInformationActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
 
+    private int userId = 2;
     private int homeId;
     private Home myHome;
 
@@ -91,9 +96,6 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
         });
 
         progressDialog = new ProgressDialog(this);
-        new HomeInformationRequestTask().execute();
-        new CommentsRequestTask().execute();
-        new AverageRatingRequestTask().execute();
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -125,6 +127,14 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        new HomeInformationRequestTask().execute();
+        new CommentsRequestTask().execute();
+        new AverageRatingRequestTask().execute();
     }
 
     @Override
@@ -160,7 +170,9 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
             alert.setPositiveButton("확인",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
-                            Toast.makeText(HomeInformationActivity.this, "별점 : " + String.valueOf(ratingBar.getRating()), Toast.LENGTH_SHORT).show();
+                            new RatingTask(ratingBar.getRating()).execute();
+                            Toast.makeText(HomeInformationActivity.this, ratingBar.getRating() + "점 평가하였습니다.", Toast.LENGTH_SHORT).show();
+                            new AverageRatingRequestTask().execute();
                         }
                     });
             alert.show();
@@ -226,7 +238,7 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
             descriptionText.setText(myHome.getDescription());
             chargeText.setText(String.valueOf(myHome.getCharge()) + "원");
             peopleText.setText(String.valueOf(myHome.getPeople()) + "명");
-            Picasso.with(imageView.getContext()).load(imageUrl + myHome.getFiledata().getFilename()).into(imageView);
+            Picasso.with(imageView.getContext()).load(imageUrl + myHome.getFiledata().getId()).into(imageView);
 
             LatLng latLng = new LatLng(myHome.getLatitude(), myHome.getLongitude());
             map.addMarker(new MarkerOptions().position(latLng).title(myHome.getName()));
@@ -302,10 +314,52 @@ public class HomeInformationActivity extends AppCompatActivity implements View.O
         @Override
         protected void onPostExecute(String string) {
             if(!(string == null)){
-                ratingText.setText(string + "점");
+                DecimalFormat df = new DecimalFormat("0.0");
+                ratingText.setText(df.format(Double.parseDouble(string)) + "점");
             }
             progressDialog.dismiss();
         }
+    }
+
+
+    private class RatingTask extends AsyncTask<Void, Void, String> {
+
+        private float score;
+
+        public RatingTask(float score){
+            this.score = score;
+        }
+
+        private MultiValueMap<String, String> message;
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            message = new LinkedMultiValueMap<String, String>();
+            message.add("user_id", String.valueOf(userId));
+            message.add("home_id", String.valueOf(homeId));
+            message.add("score", String.valueOf(score));
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                String url = "http://61.99.246.80:8080/rating/add";
+                RestTemplate restTemplate = new RestTemplate(true);
+                ResponseEntity<String> response = restTemplate.postForEntity(url, message, String.class);
+                return response.getBody();
+            }
+            catch (Exception e) {
+
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result){
+            Log.i("Result", result);
+        }
+
     }
 
 
